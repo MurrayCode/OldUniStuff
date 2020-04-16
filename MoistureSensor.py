@@ -6,7 +6,7 @@ import paho.mqtt.publish as publish
 
 class Moisture(object):
 
-	host = "ec2-34-198-178-153.compute-1.amazonaws.com" #MQTT Broker IP
+	host = "" #MQTT Broker IP
 	port = 1883 #Unsecure MQTT port
 	LED = 23	#GPIO23
 	Water = 21	#GPIO21
@@ -31,11 +31,11 @@ class Moisture(object):
 	def callback(self,Water):           #Prints if water is detected, publishes to MQTT Broker and turns LED on/off
 		if GPIO.input(Water):
 			print ("NO Water Detected!")
-			publish.single("water", "NO Water Detected!", hostname=self.host, port=self.port, auth ={'username':"ubuntu", 'password':"root"})
+			publish.single("water", "NO Water Detected!", hostname=self.host, port=self.port, auth ={'username':"", 'password':""})
 			GPIO.output(self.LED, GPIO.HIGH)
 		else:
 			print ("Water Detected!")
-			publish.single("water", "Water Detected!", hostname=self.host, port=self.port, auth ={'username':"ubuntu", 'password':"root"})
+			publish.single("water", "Water Detected!", hostname=self.host, port=self.port, auth ={'username':"", 'password':""})
 			GPIO.output(self.LED, GPIO.LOW)
 
 m = Moisture()
